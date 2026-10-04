@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free Word Counter Online – Count Words & Characters</title>
+
+<meta name="description"
+content="Free online Word Counter. Count words, characters, characters without spaces, sentences, paragraphs and estimated reading time instantly.">
+
+<meta name="keywords"
+content="Word Counter, online word counter, character counter, word count tool, free word counter, sentence counter, reading time calculator">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+
+    min-height:100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color:#3b2857;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(196,181,253,.72),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(221,214,254,.70),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(233,213,255,.85),
+            transparent 38%
+        ),
+
+        linear-gradient(
+            135deg,
+            #faf5ff,
+            #f3e8ff,
+            #ede9fe
+        );
+
+}
+
+
+/* CONTAINER */
+
+.container{
+
+    width:100%;
+
+    max-width:950px;
+
+    margin:auto;
+
+    padding:40px 18px;
+
+}
+
+
+/* HEADER */
+
+.header{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.logo{
+
+    width:78px;
+
+    height:78px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:38px;
+
+    border-radius:23px;
+
+    background:
+        rgba(255,255,255,.82);
+
+    border:
+        1px solid
+        rgba(124,58,237,.14);
+
+    box-shadow:
+        0 18px 45px
+        rgba(124,58,237,.14);
+
+    backdrop-filter:
+        blur(12px);
+
+}
+
+h1{
+
+    margin-top:18px;
+
+    font-size:38px;
+
+    line-height:1.2;
+
+    font-weight:800;
+
+    color:#7c3aed;
+
+}
+
+.subtitle{
+
+    max-width:720px;
+
+    margin:12px auto 0;
+
+    color:#65458a;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+}
+
+
+/* TOOL */
+
+.tool{
+
+    padding:25px;
+
+    border-radius:26px;
+
+    background:
+        rgba(255,255,255,.83);
+
+    border:
+        1px solid
+        rgba(124,58,237,.13);
+
+    box-shadow:
+        0 30px 80px
+        rgba(91,33,182,.12);
+
+    backdrop-filter:
+        blur(15px);
+
+}
+
+
+/* TEXT AREA */
+
+textarea{
+
+    width:100%;
+
+    min-height:320px;
+
+    padding:18px;
+
+    resize:vertical;
+
+    outline:none;
+
+    border:
+        1px solid
+        #ddd6fe;
+
+    border-radius:16px;
+
+    background:#fdfaff;
+
+    color:#3b2857;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    transition:.2s;
+
+}
+
+textarea:focus{
+
+    border-color:#a78bfa;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(139,92,246,.12);
+
+}
+
+
+/* STATS */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:12px;
+
+    margin-top:15px;
+
+}
+
+.stat{
+
+    padding:17px 12px;
+
+    border-radius:15px;
+
+    background:#faf7ff;
+
+    border:
+        1px solid
+        #ddd6fe;
+
+    text-align:center;
+
+}
+
+.stat-icon{
+
+    font-size:22px;
+
+    margin-bottom:6px;
+
+}
+
+.stat-label{
+
+    display:block;
+
+    color:#76549b;
+
+    font-size:12px;
+
+    margin-bottom:5px;
+
+}
+
+.stat-value{
+
+    display:block;
+
+    color:#7c3aed;
+
+    font-size:22px;
+
+    font-weight:800;
+
+}
+
+
+/* EXTRA STATS */
+
+.extra-stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:12px;
+
+    margin-top:12px;
+
+}
+
+.extra-stat{
+
+    padding:14px;
+
+    border-radius:13px;
+
+    background:#fdfaff;
+
+    border:
+        1px solid
+        #ede9fe;
+
+    color:#65458a;
+
+    font-size:13px;
+
+    text-align:center;
+
+}
+
+.extra-stat strong{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#7c3aed;
+
+    font-size:16px;
+
+}
+
+
+/* ACTION BUTTONS */
+
+.actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+
+.action-btn{
+
+    flex:1;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:13px;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.copy-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #a78bfa,
+            #7c3aed
+        );
+
+    color:white;
+
+    box-shadow:
+        0 12px 28px
+        rgba(124,58,237,.18);
+
+}
+
+.clear-btn{
+
+    background:#ede9fe;
+
+    color:#5b21b6;
+
+    border:
+        1px solid
+        #ddd6fe;
+
+}
+
+.action-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+/* READING INFO */
+
+.reading{
+
+    margin-top:18px;
+
+    padding:16px;
+
+    border-radius:13px;
+
+    background:#faf5ff;
+
+    border:
+        1px solid
+        #ddd6fe;
+
+    color:#65458a;
+
+    font-size:14px;
+
+    text-align:center;
+
+    line-height:1.7;
+
+}
+
+.reading strong{
+
+    color:#7c3aed;
+
+}
+
+
+/* INFO */
+
+.info{
+
+    margin-top:12px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    background:#fdfaff;
+
+    border:
+        1px solid
+        #ede9fe;
+
+    color:#76549b;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    text-align:center;
+
+}
+
+
+/* FEATURES */
+
+.features{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:25px;
+
+}
+
+.feature{
+
+    padding:10px 17px;
+
+    border-radius:50px;
+
+    background:
+        rgba(255,255,255,.80);
+
+    border:
+        1px solid
+        #ddd6fe;
+
+    color:#6d28d9;
+
+    font-size:13px;
+
+}
+
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:#76549b;
+
+    font-size:13px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .container{
+
+        padding:25px 12px;
+
+    }
+
+    h1{
+
+        font-size:29px;
+
+    }
+
+    .subtitle{
+
+        font-size:14px;
+
+    }
+
+    .tool{
+
+        padding:16px;
+
+        border-radius:20px;
+
+    }
+
+    textarea{
+
+        min-height:260px;
+
+        font-size:15px;
+
+    }
+
+    .stats{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .extra-stats{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .actions{
+
+        flex-direction:column;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+
+        <div class="logo">
+
+            📝
+
+        </div>
+
+
+        <h1>
+
+            Free Word Counter
+
+        </h1>
+
+
+        <p class="subtitle">
+
+            Count words, characters, sentences,
+            paragraphs and estimated reading time
+            instantly with our free online Word Counter.
+
+        </p>
+
+
+    </div>
+
+
+
+    <!-- TOOL -->
+
+    <div class="tool">
+
+
+        <textarea
+            id="textInput"
+            placeholder="Type or paste your text here..."
+            oninput="updateCounts()">
+        </textarea>
+
+
+
+        <!-- MAIN STATS -->
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <span class="stat-label">
+                    Words
+                </span>
+
+                <span
+                    class="stat-value"
+                    id="wordCount">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    🔤
+                </div>
+
+                <span class="stat-label">
+                    Characters
+                </span>
+
+                <span
+                    class="stat-value"
+                    id="charCount">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    ⏱️
+                </div>
+
+                <span class="stat-label">
+                    Reading Time
+                </span>
+
+                <span
+                    class="stat-value"
+                    id="readingTime">
+                    0 min
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- EXTRA STATS -->
+
+        <div class="extra-stats">
+
+
+            <div class="extra-stat">
+
+                Characters without spaces
+
+                <strong id="charNoSpace">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="extra-stat">
+
+                Sentences
+
+                <strong id="sentenceCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="extra-stat">
+
+                Paragraphs
+
+                <strong id="paragraphCount">
+                    0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+
+            <button
+                class="action-btn copy-btn"
+                onclick="copyText()">
+
+                📋 Copy Text
+
+            </button>
+
+
+            <button
+                class="action-btn clear-btn"
+                onclick="clearText()">
+
+                🗑️ Clear
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- READING INFO -->
+
+        <div class="reading">
+
+            📖 Estimated reading time:
+            <strong id="readingText">
+                0 minutes
+            </strong>
+
+            <br>
+
+            Average reading speed:
+            <strong>
+                200 words per minute
+            </strong>
+
+        </div>
+
+
+
+        <!-- INFO -->
+
+        <div class="info">
+
+            ⚡ Counts update automatically while you type
+            or paste your text. Everything is processed
+            directly in your browser.
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FEATURES -->
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            📝 Word Count
+
+        </div>
+
+
+        <div class="feature">
+
+            🔤 Character Count
+
+        </div>
+
+
+        <div class="feature">
+
+            📄 Sentence Count
+
+        </div>
+
+
+        <div class="feature">
+
+            📑 Paragraph Count
+
+        </div>
+
+
+        <div class="feature">
+
+            ⏱️ Reading Time
+
+        </div>
+
+
+        <div class="feature">
+
+            📋 Copy Text
+
+        </div>
+
+
+        <div class="feature">
+
+            📱 Mobile Friendly
+
+        </div>
+
+
+        <div class="feature">
+
+            🆓 Free to Use
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Free Word Counter • Count Words & Characters Online
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* GET TEXT */
+
+function getText(){
+
+    return document
+        .getElementById("textInput")
+        .value;
+
+}
+
+
+/* UPDATE ALL COUNTS */
+
+function updateCounts(){
+
+    const text = getText();
+
+
+    /* WORD COUNT */
+
+    const words =
+        text.trim()
+            ? text.trim().split(/\s+/).length
+            : 0;
+
+
+    /* CHARACTER COUNT */
+
+    const characters =
+        text.length;
+
+
+    /* CHARACTERS WITHOUT SPACES */
+
+    const charactersNoSpace =
+        text.replace(/\s/g,"").length;
+
+
+    /* SENTENCE COUNT */
+
+    const sentences =
+        text.trim()
+            ? (
+                text
+                    .split(/[.!?]+/)
+                    .filter(
+                        sentence =>
+                        sentence.trim().length > 0
+                    )
+                    .length
+              )
+            : 0;
+
+
+    /* PARAGRAPH COUNT */
+
+    const paragraphs =
+        text.trim()
+            ? (
+                text
+                    .split(/\n\s*\n/)
+                    .filter(
+                        paragraph =>
+                        paragraph.trim().length > 0
+                    )
+                    .length
+              )
+            : 0;
+
+
+    /* READING TIME */
+
+    const readingMinutes =
+        words > 0
+            ? Math.ceil(words / 200)
+            : 0;
+
+
+    /* UPDATE DOM */
+
+    document
+        .getElementById("wordCount")
+        .textContent =
+        words;
+
+
+    document
+        .getElementById("charCount")
+        .textContent =
+        characters;
+
+
+    document
+        .getElementById("charNoSpace")
+        .textContent =
+        charactersNoSpace;
+
+
+    document
+        .getElementById("sentenceCount")
+        .textContent =
+        sentences;
+
+
+    document
+        .getElementById("paragraphCount")
+        .textContent =
+        paragraphs;
+
+
+    document
+        .getElementById("readingTime")
+        .textContent =
+        readingMinutes + " min";
+
+
+    document
+        .getElementById("readingText")
+        .textContent =
+        readingMinutes +
+        (
+            readingMinutes === 1
+                ? " minute"
+                : " minutes"
+        );
+
+}
+
+
+/* COPY */
+
+async function copyText(){
+
+    const text = getText();
+
+
+    if(!text.trim()){
+
+        alert(
+            "Please enter some text first."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await navigator
+            .clipboard
+            .writeText(text);
+
+
+        const button =
+            document.querySelector(".copy-btn");
+
+
+        button.textContent =
+            "✅ Copied!";
+
+
+        setTimeout(function(){
+
+            button.textContent =
+                "📋 Copy Text";
+
+        },1500);
+
+
+    }
+
+    catch(error){
+
+        alert(
+            "Unable to copy the text."
+        );
+
+    }
+
+}
+
+
+/* CLEAR */
+
+function clearText(){
+
+    document
+        .getElementById("textInput")
+        .value = "";
+
+    updateCounts();
+
+}
+
+
+/* INITIAL */
+
+updateCounts();
+
+</script>
+
+
+</body>
+
+</html>
